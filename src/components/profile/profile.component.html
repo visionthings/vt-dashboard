@@ -1,0 +1,98 @@
+<app-navbar></app-navbar>
+<section class="mt-10 container">
+  <div class="flex justify-end mb-10">
+    <a routerLink="/dashboard" class="text-slate-500 underline">
+      العودة للصفحة الرئيسية
+    </a>
+  </div>
+
+  <div class="rounded-lg ring-1 ring-slate-200 py-10 container">
+    <!-- Profile info -->
+    <div
+      *ngIf="isUserLoaded"
+      class="flex flex-col justify-center items-center gap-3"
+    >
+      <img
+        [src]="user.media[0].original_url"
+        alt="profile picture"
+        width="120"
+        height="120"
+        class="rounded-full ring-2 ring-teal-500 bg-white"
+      />
+      <p class="text-teal-500">{{ user.name }}</p>
+      <p class="text-slate-500">{{ user.email }}</p>
+    </div>
+
+    <!-- Update profile form -->
+
+    <form
+      [formGroup]="profileForm"
+      (ngSubmit)="updateProfile()"
+      class="grid grid-cols-1 gap-5 mt-10"
+    >
+      <div>
+        <label for="name" class="mb-5">الاسم</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          formControlName="name"
+          class="ring-1 ring-slate-200"
+        />
+        <div
+          *ngIf="name.invalid && (name.touched || name.dirty)"
+          class="bg-rose-700 text-white rounded-lg w-full text-center mt-5 py-3"
+        >
+          <p *ngIf="name.hasError('required')">حقل الإسم مطلوب.</p>
+        </div>
+      </div>
+      <div>
+        <label for="email">البريد الإلكتروني</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          formControlName="email"
+          class="ring-1 ring-slate-200"
+        />
+        <div
+          *ngIf="email.invalid && (email.touched || email.dirty)"
+          class="bg-rose-700 text-white rounded-lg w-full text-center mt-5 py-3"
+        >
+          <p *ngIf="email.hasError('required')">حقل البريد الإلكتروني مطلوب.</p>
+          <p *ngIf="email.hasError('email')">ادخل بريد إلكتروني صالح.</p>
+        </div>
+      </div>
+      <div>
+        <label for="password">كلمة المرور</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          formControlName="password"
+          class="ring-1 ring-slate-200"
+        />
+        <div
+          *ngIf="password.invalid && (password.touched || password.dirty)"
+          class="bg-rose-700 text-white rounded-lg w-full text-center mt-5 py-3"
+        >
+          <p *ngIf="password.hasError('required')">ادخل كلمة المرور.</p>
+          <p *ngIf="password.hasError('minlength')">ادخل كلمة مرور قوية.</p>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <button type="submit" [disabled]="profileForm.invalid">
+          تحديث الملف الشخصي
+        </button>
+      </div>
+    </form>
+    <div
+      *ngIf="successMessage"
+      class="bg-teal-700 text-white rounded-lg w-full text-center mt-5 py-3"
+    >
+      <p>تم تعديل بيانات الملف الشخصي بنجاح.</p>
+    </div>
+  </div>
+</section>
+<app-footer></app-footer>

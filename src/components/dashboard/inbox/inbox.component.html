@@ -1,0 +1,47 @@
+<section>
+  <h3 class="text-xl mb-10">رسائل الزوار</h3>
+
+  @if (isMessagesLoaded && messages.length === 0) {
+  <p class="text-center">عفواً لا توجد رسائل حتى الآن.</p>
+  } @else {
+  <div class="table-container">
+    <table class="text-center w-full">
+      <thead>
+        <tr>
+          <th>اسم الراسل</th>
+          <th>رقم الجوال</th>
+          <th>البريد الإلكتروني</th>
+          <th>موضوع الرسالة</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (message of messages; track message.id) {
+        <tr (click)="setCurrentMessage(message.message)">
+          <td>{{ message.name }}</td>
+          <td>{{ message.phone }}</td>
+          <td>{{ message.email }}</td>
+          <td>{{ message.subject }}</td>
+          <td>
+            <div (click)="deleteMessage(message.id)">
+              <fa-icon
+                [icon]="icons.delete"
+                class="text-rose-700 cursor-pointer"
+              ></fa-icon>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Message Content -->
+  @if (currentMessage) {
+  <div
+    class="ring-1 ring-slate-200 rounded-lg container text-center text-slate-500 py-5 mt-10"
+  >
+    <p>{{ currentMessage }}</p>
+  </div>
+  } }
+</section>

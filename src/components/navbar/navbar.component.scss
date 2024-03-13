@@ -1,0 +1,18 @@
+nav {
+  height: 60px;
+  background: linear-gradient(
+    337deg,
+    rgba(34, 42, 166, 1) 0%,
+    rgba(104, 132, 253, 1) 100%
+  );
+}
+
+.profile-menu {
+  height: 0;
+  overflow: hidden;
+}
+
+.open-profile-menu {
+  height: 300px;
+  transition: 0.5s all;
+}
