@@ -12,10 +12,10 @@ export class DashboardService {
 
   // Messages
   getMessages() {
-    return this.http.get(`${this.endpoint}/contact-messages`);
+    return this.http.get(`${this.endpoint}/messages`);
   }
   deleteMessage(messageID: string) {
-    return this.http.delete(`${this.endpoint}/contact-messages/${messageID}`);
+    return this.http.delete(`${this.endpoint}/messages/${messageID}`);
   }
 
   // Contracts
