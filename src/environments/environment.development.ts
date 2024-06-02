@@ -1,3 +1,3 @@
 export const environment = {
-  endpoint: 'http://api.vt.com.sa/api',
+  endpoint: 'https://api.vt.com.sa/api',
 };
