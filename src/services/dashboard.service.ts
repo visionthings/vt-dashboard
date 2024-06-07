@@ -11,43 +11,142 @@ export class DashboardService {
   endpoint = environment.endpoint;
 
   // Messages
-  getMessages() {
-    return this.http.get(`${this.endpoint}/messages`);
-  }
-  deleteMessage(messageID: string) {
-    return this.http.delete(`${this.endpoint}/messages/${messageID}`);
-  }
-
-  // Contracts
-  getContracts() {
+  sendMail(data: any) {
     let token;
     if (typeof window !== 'undefined') {
       token = localStorage.getItem('token');
     }
-    return this.http.get(`${this.endpoint}/contracts`, {
+
+    return this.http.post(`${this.endpoint}/send-mail`, data, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
       }),
     });
   }
 
-  // Visit requests
-  getVisitRequests() {
+  getInbox() {
     let token;
     if (typeof window !== 'undefined') {
       token = localStorage.getItem('token');
     }
-    return this.http.get(`${this.endpoint}/visit-request`, {
+
+    return this.http.get(`${this.endpoint}/messages`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
       }),
     });
   }
+
+  getInboxPage(pageURL: string) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+
+    return this.http.get(pageURL, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
+  deleteFromInbox(id: string) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+
+    return this.http.delete(`${this.endpoint}/messages/${id}`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
+  getOutbox() {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.get(`${this.endpoint}/outbox`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
+  getOutboxPage(pageURL: string) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+
+    return this.http.get(pageURL, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+  deleteFromOutbox(id: string) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+
+    return this.http.delete(`${this.endpoint}/delete-mail/${id}`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
+  // Visit Requests
+  openVisitRequests() {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.get(`${this.endpoint}/open-visit-requests`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
+  closedVisitRequests() {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.get(`${this.endpoint}/closed-visit-requests`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
+  closeTicket(id: string) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.post(
+      `${this.endpoint}/close-ticket/${id}`,
+      {},
+      {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        }),
+      }
+    );
+  }
+
   deleteVisitRequest(id: string) {
     let token;
     if (typeof window !== 'undefined') {
       token = localStorage.getItem('token');
     }
+
     return this.http.delete(`${this.endpoint}/visit-request/${id}`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
@@ -68,7 +167,26 @@ export class DashboardService {
     });
   }
   getPromocodes() {
-    return this.http.get(`${this.endpoint}/promocodes`);
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.get(`${this.endpoint}/promocodes`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+  getPromocodesPage(url: string) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.get(url, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
   }
   deletePromocode(id: string) {
     let token;
@@ -82,38 +200,14 @@ export class DashboardService {
     });
   }
 
-  // Statistics
-  getVisitsCount() {
-    return this.http.get(`${this.endpoint}/visits/count`);
-  }
-  getContractsSales() {
+  // PUBLIC
+  getPage(pageURL: string) {
     let token;
     if (typeof window !== 'undefined') {
       token = localStorage.getItem('token');
     }
-    return this.http.get(`${this.endpoint}/contracts/sales`, {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      }),
-    });
-  }
-  getContractsCount() {
-    let token;
-    if (typeof window !== 'undefined') {
-      token = localStorage.getItem('token');
-    }
-    return this.http.get(`${this.endpoint}/contracts/count`, {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`,
-      }),
-    });
-  }
-  getUsersCount() {
-    let token;
-    if (typeof window !== 'undefined') {
-      token = localStorage.getItem('token');
-    }
-    return this.http.get(`${this.endpoint}/users/count`, {
+
+    return this.http.get(pageURL, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`,
       }),

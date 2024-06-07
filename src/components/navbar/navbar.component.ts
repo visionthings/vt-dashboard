@@ -3,11 +3,12 @@ import { AuthService } from '../../services/auth.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import { Router, RouterLink } from '@angular/router';
+import { NgOptimizedImage } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [FontAwesomeModule, RouterLink],
+  imports: [FontAwesomeModule, RouterLink, NgOptimizedImage],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
@@ -36,13 +37,10 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (typeof window !== 'undefined') {
-      let id = localStorage.getItem('id');
-      this.authService.getUser(id).subscribe({
-        next: (res) => {
-          this.user = res;
-        },
-      });
-    }
+    this.authService.checkAuth().subscribe({
+      next: (res) => {
+        this.user = res;
+      },
+    });
   }
 }

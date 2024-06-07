@@ -1,3 +1,21 @@
 .active {
   color: #2563eb;
 }
+.accordion-arrow {
+  transition: 0.3s all;
+}
+.accordion-menu {
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: 1fr;
+  transition: grid-template-rows 0.3s;
+}
+.accordion-menu-closed {
+  grid-template-rows: 0fr;
+}
+.closed-accordion-arrow {
+  transform: rotate(0deg);
+}
+.opened-accordion-arrow {
+  transform: rotate(-90deg);
+}

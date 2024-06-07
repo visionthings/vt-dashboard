@@ -59,4 +59,17 @@ export class AuthService {
       headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
     });
   }
+
+  checkAuth() {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+
+    return this.http.get(`${this.endpoint}/users/check-auth`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
 }

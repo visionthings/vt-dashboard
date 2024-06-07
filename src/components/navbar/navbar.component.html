@@ -1,13 +1,14 @@
 <nav>
   <div class="container flex justify-between items-center">
     <!-- Logo -->
-    <img
-      src="assets/images/logo.png"
-      alt="Logo"
-      width="40"
-      height="40"
-      class="mt-2"
-    />
+    <a routerLink="/dashboard">
+      <img
+        src="assets/images/logo.png"
+        alt="Logo"
+        width="40"
+        height="40"
+        class="mt-2"
+    /></a>
 
     <!-- Profile -->
     <div>
@@ -23,7 +24,7 @@
         </div>
 
         <img
-          [src]="user.media[0].original_url"
+          [ngSrc]="user.media[0].original_url"
           alt="Profile picture"
           width="40"
           height="40"

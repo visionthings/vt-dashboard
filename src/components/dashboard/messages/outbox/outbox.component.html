@@ -1,0 +1,55 @@
+@if (isLoading) {
+<app-loading></app-loading>
+}@else {
+<app-heading message="البريد الصادر"></app-heading>
+
+@if (messages.length == 0) { <app-empty-state></app-empty-state>} @else {
+<!-- Current Message -->
+@if(currentMessage){
+<div class="mb-10 ring-1 ring-slate-200 py-5 rounded container shadow">
+  <p>{{ currentMessage }}</p>
+</div>
+
+}
+<div class="w-full overflow-x-auto">
+  <table class="mb-5 w-full text-nowrap">
+    <thead>
+      <th>المرسل اليه</th>
+      <th>موضوع الرسالة</th>
+      <th>تاريخ الرسالة</th>
+      <th>قراءة الرسالة</th>
+      <th>حذف الرسالة</th>
+    </thead>
+    <tbody>
+      @for (message of messages; track $index) {
+      <tr>
+        <td>{{ message.to }}</td>
+        <td>{{ message.subject }}</td>
+        <td>{{ message.created_at.slice(0, 10) }}</td>
+        <td>
+          <fa-icon
+            [icon]="icons.read"
+            class="text-teal-700 hover:text-teal-500 cursor-pointer w-fit h-fit"
+            (click)="read(message.message)"
+          ></fa-icon>
+        </td>
+        <td>
+          <fa-icon
+            [icon]="icons.delete"
+            class="text-rose-700 hover:text-rose-500 cursor-pointer w-fit h-fit"
+            (click)="delete(message.id)"
+          ></fa-icon>
+        </td>
+      </tr>
+
+      }
+    </tbody>
+  </table>
+</div>
+<app-pagination [res]="res" (newPageEvent)="setPage($event)"></app-pagination>}
+@if (successMessage) {
+<app-success-message [message]="successMessage"></app-success-message>
+} @if (errorMessage) {
+<app-error-message [message]="errorMessage"></app-error-message>
+
+} }

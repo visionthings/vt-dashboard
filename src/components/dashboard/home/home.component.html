@@ -1,40 +1,9 @@
 <section>
   <h3 class="text-xl mb-10">الصفحة الرئيسية</h3>
-
-  <!-- Cards -->
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-    @for (card of cards; track card.id) {
-    <div
-      class="flex flex-col justify-center items-center gap-4 rounded-lg ring-1 ring-slate-200 shadow-lg py-5"
-    >
-      <fa-icon [icon]="card.icon" class="text-4xl text-blue-700"></fa-icon>
-
-      <p>{{ card.title }}</p>
-
-      <p>{{ card.data }}</p>
-    </div>
-    }
-  </div>
-
-  <!-- Users/Visits Chart and Sales Chart -->
-  <div class="grid grid-cols-1 gap-5">
-    <!-- Users/Visits Chart -->
-    <div class="mt-10">
-      <h3 class="mb-10 text-xl">نسبة الزيارات إلى الأعضاء المسجلة</h3>
-      <div id="chart" class="flex justify-center items-center">
-        <apx-chart
-          [series]="chartOptions.series"
-          [labels]="chartOptions.labels"
-          [chart]="chartOptions.chart"
-          [labels]="chartOptions.labels"
-          [fill]="chartOptions.fill"
-          [dataLabels]="chartOptions.dataLabels"
-          [responsive]="chartOptions.responsive"
-        ></apx-chart>
-      </div>
-    </div>
-    <div>
-      <app-profit-chart></app-profit-chart>
-    </div>
+  <div class="grid grid-cols-1 gap-10">
+    <app-overview></app-overview>
+    <app-revenue></app-revenue>
+    <app-contracts-report></app-contracts-report>
+    <app-requests-report></app-requests-report>
   </div>
 </section>

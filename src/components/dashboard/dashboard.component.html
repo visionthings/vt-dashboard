@@ -5,10 +5,55 @@
     class="pt-10 rounded-lg overflow-hidden ring-1 ring-slate-200 shadow-lg w-fit flex flex-col justify-between"
   >
     <div class="container flex flex-col gap-5 mb-10">
-      @for (item of sidebarItems; track item.id) {
-      <a [routerLink]="item.path" routerLinkActive="active"
-        >{{ item.title }}
+      <a
+        routerLink="/dashboard/home"
+        routerLinkActive="active"
+        (click)="updateActiveItem(0)"
+        class="mb-5"
+      >
+        <div class="flex gap-3 hover:text-blue-700">
+          <fa-icon [icon]="icons.home"></fa-icon>
+          <p>الرئيسية</p>
+        </div>
       </a>
+      @for (item of sidebarItems; track item.id) {
+      <div
+        [ngClass]="activeItem === item.id ? 'text-blue-700' : ''"
+        class="flex justify-between cursor-pointer hover:text-blue-700"
+        (click)="updateActiveItem(item.id)"
+      >
+        <div class="flex gap-3">
+          <fa-icon [icon]="item.icon"></fa-icon>
+          <p>{{ item.title }}</p>
+        </div>
+        <div
+          class="accordion-arrow"
+          [ngClass]="
+            activeItem === item.id
+              ? 'opened-accordion-arrow'
+              : 'closed-accordion-arrow'
+          "
+        >
+          <fa-icon [icon]="icons.arrow"></fa-icon>
+        </div>
+      </div>
+      <div
+        class="overflow-hidden accordion-menu"
+        [ngClass]="
+          activeItem === item.id ? 'accordion-menu' : 'accordion-menu-closed'
+        "
+      >
+        <div class="min-h-0 flex flex-col gap-3 text-slate-500 text-sm ps-5">
+          @for (cat of item.categories; track cat.id) {
+          <a
+            [routerLink]="cat.path"
+            routerLinkActive="active"
+            class="hover:text-blue-700"
+            ><p>{{ cat.title }}</p>
+          </a>
+          }
+        </div>
+      </div>
       }
     </div>
     <div>

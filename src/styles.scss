@@ -17,3 +17,31 @@ button {
 button:hover {
   outline: 3px solid #dbeafe;
 }
+
+table {
+  width: 100%;
+}
+thead {
+  background: linear-gradient(
+    337deg,
+    rgba(34, 42, 166, 1) 0%,
+    rgba(104, 132, 253, 1) 100%
+  );
+  color: white;
+  height: 50px;
+  text-align: center;
+}
+tr {
+  height: 50px;
+  text-align: center;
+  border-bottom: 1px solid #cbd5e1;
+}
+tr:hover {
+  background-color: #eff6ff !important;
+}
+td,
+th {
+  padding-right: 30px !important;
+  padding-left: 30px !important;
+  text-align: center !important;
+}
