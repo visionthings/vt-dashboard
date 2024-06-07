@@ -30,7 +30,7 @@ export class RequestsReportComponent implements OnInit {
         this.chartOptions = {
           series: [
             {
-              name: 'الإيرادات ',
+              name: 'طلبات الصيانة ',
               data: Object.values(res),
             },
           ],

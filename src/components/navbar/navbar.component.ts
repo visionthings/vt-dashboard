@@ -41,6 +41,9 @@ export class NavbarComponent implements OnInit {
       next: (res) => {
         this.user = res;
       },
+      error: () => {
+        this.logout();
+      },
     });
   }
 }
