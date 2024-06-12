@@ -20,6 +20,30 @@ export class MembershipService {
       }),
     });
   }
+  showMember(id: string) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.get(`${this.endpoint}/users/${id}`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
+  updateMember(id: any, data: any) {
+    let token;
+    if (typeof window !== 'undefined') {
+      token = localStorage.getItem('token');
+    }
+    return this.http.post(`${this.endpoint}/users/${id}`, data, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`,
+      }),
+    });
+  }
+
   getBlockedMembers() {
     let token;
     if (typeof window !== 'undefined') {

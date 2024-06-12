@@ -1,0 +1,136 @@
+<section>
+  @if(!user) { <app-loading></app-loading>} @else {
+  <app-heading message="البيانات الشخصية"></app-heading>
+  <form
+    [formGroup]="userForm"
+    (ngSubmit)="updateUser()"
+    class="grid grid-cols-1 gap-5"
+  >
+    <!-- Name -->
+    <div>
+      <label for="name">الاسم</label>
+      <input type="text" id="name" name="name" formControlName="name" />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label for="phone">رقم الجوال</label>
+      <input type="text" id="phone" name="phone" formControlName="phone" />
+    </div>
+
+    <!-- Email -->
+    <div>
+      <label for="email">البريد الإلكتروني</label>
+      <input type="text" id="email" name="email" formControlName="email" />
+    </div>
+
+    <!-- Email Verification Status -->
+    <div>
+      <label for="email_verified_at">حالة تفعيل البريد الإلكتروني</label>
+      <select
+        name="email_verified_at"
+        formControlName="email_verified_at"
+        id="email_verified_at"
+        ngModel
+      >
+        <option [value]="date" [selected]="user.email_verified_at">مفعل</option>
+        <option value="null" [selected]="!user.email_verified_at">
+          غير مفعل
+        </option>
+      </select>
+    </div>
+
+    <!-- Update User -->
+    <button type="submit" [disabled]="userForm.invalid">
+      تعديل بيانات العضو
+    </button>
+  </form>
+
+  <!-- User Contracts -->
+  <div class="my-10">
+    <app-heading message="العقود المسجلة"></app-heading>
+
+    @if(user.contracts.length == 0){
+    <app-empty-state></app-empty-state>
+    } @else {
+    <div class="w-full overflow-x-auto">
+      <table class="mb-10 text-nowrap">
+        <thead>
+          <th>رقم العقد</th>
+
+          <th>تاريخ التعاقد</th>
+          <th>قيمة العقد</th>
+          <th>حالة الدفع</th>
+        </thead>
+        <tbody>
+          @for (contract of user.contracts; track contract.id) {
+          <tr (click)="editContract(contract.id)" class="cursor-pointer">
+            <td>
+              {{ contract.id }}
+            </td>
+
+            <td>{{ contract.contract_date }}</td>
+            <td>{{ contract.total_price }} ريال سعودي</td>
+            <td>
+              <div
+                class="px-5 py-1 text-white rounded"
+                [ngClass]="contract.is_paid ? 'bg-teal-500' : 'bg-rose-600'"
+              >
+                {{ contract.is_paid ? "مدفوع" : "غير مدفوع" }}
+              </div>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+  </div>
+
+  <!-- User Companies -->
+  <div>
+    <app-heading message="الشركات المسجلة"></app-heading>
+
+    @if(user.companies.length == 0){
+    <app-empty-state></app-empty-state>
+    } @else {
+    <div class="w-full overflow-x-auto">
+      <table class="mb-10 text-nowrap">
+        <thead>
+          <th>اسم الشركة</th>
+          <th>نوع الشركة</th>
+          <th>رقم السجل التجاري</th>
+          <th>رقم المبنى</th>
+          <th>الشارع</th>
+          <th>الحي</th>
+          <th>المدينة</th>
+        </thead>
+        <tbody>
+          @for (company of user.companies; track company.id) {
+          <tr>
+            <td>
+              {{ company.company_name }}
+            </td>
+            <td>
+              {{ company.company_type }}
+            </td>
+
+            <td>{{ company.commercial_number }}</td>
+            <td>{{ company.building_number }}</td>
+            <td>{{ company.street }}</td>
+            <td>{{ company.district }}</td>
+            <td>{{ company.city }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+  </div>
+  }
+</section>
+@if (successMessage) {
+<app-success-message [message]="successMessage"></app-success-message>
+} @if (errorMessage) {
+<app-error-message [message]="errorMessage"></app-error-message>
+}

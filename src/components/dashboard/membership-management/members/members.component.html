@@ -26,6 +26,7 @@
       <th>اسم العضو</th>
       <th>رقم الجوال</th>
       <th>البريد الإلكتروني</th>
+      <th>المرحلة</th>
       <th>عدد الشركات</th>
       <th>عدد العقود</th>
       <th>حذف العضو</th>
@@ -33,12 +34,23 @@
     </thead>
     <tbody>
       @for (user of users; track $index) {
-      <tr>
-        <td>{{ user.name }}</td>
-        <td>{{ user.phone }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.companies.length }}</td>
-        <td>{{ user.contracts.length }}</td>
+      <tr class="cursor-pointer">
+        <td (click)="showMember(user.id)">{{ user.name }}</td>
+        <td (click)="showMember(user.id)">{{ user.phone }}</td>
+        <td (click)="showMember(user.id)">{{ user.email }}</td>
+        <td (click)="showMember(user.id)">
+          @switch (user.stage) { @case ('1') {
+          <p>التسجيل</p>
+          } @case ('2') {
+          <p>التفعيل</p>
+          } @case ('3') {
+          <p>الدفع</p>
+          } @case ('4') {
+          <p>إصدار العقد</p>
+          } }
+        </td>
+        <td (click)="showMember(user.id)">{{ user.companies.length }}</td>
+        <td (click)="showMember(user.id)">{{ user.contracts.length }}</td>
         <td>
           <fa-icon
             [icon]="icons.delete"

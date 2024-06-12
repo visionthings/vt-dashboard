@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTrashCan, faBan } from '@fortawesome/free-solid-svg-icons';
 import { MembershipService } from '../../../../services/membership.service';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-members',
@@ -31,7 +32,8 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 export class MembersComponent implements OnInit {
   constructor(
     private membershipService: MembershipService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {}
   icons = {
     delete: faTrashCan,
@@ -116,6 +118,11 @@ export class MembersComponent implements OnInit {
         this.users = res;
       },
     });
+  }
+
+  // Show Member
+  showMember(id: string) {
+    this.router.navigateByUrl(`/dashboard/member/${id}`);
   }
 
   ngOnInit(): void {

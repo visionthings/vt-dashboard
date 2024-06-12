@@ -16,6 +16,7 @@ import { CreateNewPromocodeComponent } from '../components/dashboard/promocodes/
 import { MembersComponent } from '../components/dashboard/membership-management/members/members.component';
 import { BlockedMembersComponent } from '../components/dashboard/membership-management/blocked-members/blocked-members.component';
 import { EditContractComponent } from '../components/dashboard/contracts-management/edit-contract/edit-contract.component';
+import { MemberComponent } from '../components/dashboard/membership-management/member/member.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -92,6 +93,11 @@ export const routes: Routes = [
       {
         path: 'members',
         component: MembersComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'member/:id',
+        component: MemberComponent,
         canActivate: [authGuard],
       },
       {

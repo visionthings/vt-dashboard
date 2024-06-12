@@ -26,7 +26,9 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe({
       next: (res) => {
-        localStorage.clear();
+        if (typeof window !== 'undefined') {
+          localStorage.clear();
+        }
         this.router.navigateByUrl('/login');
       },
     });
@@ -42,7 +44,10 @@ export class NavbarComponent implements OnInit {
         this.user = res;
       },
       error: () => {
-        this.logout();
+        if (typeof window !== 'undefined') {
+          localStorage.clear();
+        }
+        this.router.navigateByUrl('/login');
       },
     });
   }
