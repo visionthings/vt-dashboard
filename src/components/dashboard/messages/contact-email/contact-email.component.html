@@ -1,0 +1,14 @@
+<section>
+  <app-heading message="تعيين بريد إلكتروني لتلقي الإشعارات"></app-heading>
+
+  <form [formGroup]="form" (ngSubmit)="submit()" class="grid grid-cols-3 gap-5">
+    <label for="email">البريد الإلكتروني</label>
+    <input type="text" id="email" name="email" formControlName="email" />
+    <button type="submit">حفظ</button>
+  </form>
+</section>
+@if (successMessage) {
+<app-success-message [message]="successMessage"></app-success-message>
+} @if (errorMessage) {
+<app-error-message [message]="errorMessage"></app-error-message>
+}

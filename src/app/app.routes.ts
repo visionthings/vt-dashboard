@@ -17,6 +17,7 @@ import { MembersComponent } from '../components/dashboard/membership-management/
 import { BlockedMembersComponent } from '../components/dashboard/membership-management/blocked-members/blocked-members.component';
 import { EditContractComponent } from '../components/dashboard/contracts-management/edit-contract/edit-contract.component';
 import { MemberComponent } from '../components/dashboard/membership-management/member/member.component';
+import { ContactEmailComponent } from '../components/dashboard/messages/contact-email/contact-email.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,6 +48,11 @@ export const routes: Routes = [
       },
       { path: 'inbox', component: InboxComponent, canActivate: [authGuard] },
       { path: 'outbox', component: OutboxComponent, canActivate: [authGuard] },
+      {
+        path: 'set-contact-email',
+        component: ContactEmailComponent,
+        canActivate: [authGuard],
+      },
 
       // Contracts Management
       {

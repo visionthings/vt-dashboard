@@ -26,6 +26,7 @@
       <th>اسم العضو</th>
       <th>رقم الجوال</th>
       <th>البريد الإلكتروني</th>
+      <th>حالة تفعيل البريد الإلكتروني</th>
       <th>المرحلة</th>
       <th>عدد الشركات</th>
       <th>عدد العقود</th>
@@ -38,6 +39,9 @@
         <td (click)="showMember(user.id)">{{ user.name }}</td>
         <td (click)="showMember(user.id)">{{ user.phone }}</td>
         <td (click)="showMember(user.id)">{{ user.email }}</td>
+        <td (click)="showMember(user.id)">
+          {{ user.email_verified_at ? "مفعل" : "غير مفعل" }}
+        </td>
         <td (click)="showMember(user.id)">
           @switch (user.stage) { @case ('1') {
           <p>التسجيل</p>

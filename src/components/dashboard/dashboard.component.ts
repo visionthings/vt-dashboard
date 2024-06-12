@@ -59,6 +59,11 @@ export class DashboardComponent implements OnInit {
         { id: 2.1, title: 'إرسال رسالة جديدة', path: 'create-new-mail' },
         { id: 2.2, title: 'البريد الوارد', path: 'inbox' },
         { id: 2.3, title: 'البريد الصادر', path: 'outbox' },
+        {
+          id: 2.4,
+          title: 'تعيين بريد لتلقي الإشعارات',
+          path: 'set-contact-email',
+        },
       ],
     },
     {
